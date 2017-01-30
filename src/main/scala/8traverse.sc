@@ -1,4 +1,4 @@
-import cats.Applicative
+import cats.{Applicative, Traverse}
 import cats.instances.all._
 import cats.syntax.traverse._
 
@@ -9,6 +9,7 @@ import scala.concurrent.{Await, Future}
 val f = { (i: Int) =>
   if (i % 2 == 0) Some(i) else None
 }
+Traverse[List].traverse(List(2, 4))(f)
 List(2, 4).traverse(f)
 List(1).traverse(f)
 List(1).map(f)
@@ -34,3 +35,11 @@ val fs1 = Future.traverse(List(1, 2))(n => Future.successful(n + 1))
 Await.result(fs1, 1.second)
 val fs2 = List(1, 2).traverse(n => Future.successful(n + 1))
 Await.result(fs2, 1.second)
+
+val someInt: Option[Int] = Some(1)
+val fs2_2 = someInt.traverse(n => Future.successful(n + 1))
+Await.result(fs2_2, 1.second)
+
+val noneInt: Option[Int] = None
+val fs2_3 = noneInt.traverse(n => Future.successful(n + 1))
+Await.result(fs2_3, 1.second)

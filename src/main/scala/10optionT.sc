@@ -10,12 +10,15 @@ val customGreetingT: OptionT[Future, String] = OptionT(customGreeting)
 
 val excitedGreeting: Future[Option[String]] = customGreeting.map(_.map(_ + "!"))
 val excitedGreetingT: OptionT[Future, String] = customGreetingT.map(_ + "!")
+excitedGreetingT.value
 
 val hasWelcome: Future[Option[String]] = customGreeting.map(_.filter(_.contains("welcome")))
 val withWelcomeT: OptionT[Future, String] = customGreetingT.filter(_.contains("welcome"))
+withWelcomeT.value
 
 val noWelcome: Future[Option[String]] = customGreeting.map(_.filterNot(_.contains("welcome")))
 val noWelcomeT: OptionT[Future, String] = customGreetingT.filterNot(_.contains("welcome"))
+noWelcomeT.value
 
 val withFallback: Future[String] = customGreeting.map(_.getOrElse("hello, there!"))
-val withFallbackT: Future[String] = customGreetingT.getOrElse("hello, there!")
+val withFallbackTValue: Future[String] = customGreetingT.getOrElse("hello, there!")

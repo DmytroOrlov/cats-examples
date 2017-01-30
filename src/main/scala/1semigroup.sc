@@ -10,3 +10,9 @@ val map1 = Map("hello" -> 1, "world" -> 1)
 val map2 = Map("hello" -> 2, "cats"  -> 2)
 
 map1 |+| map2
+
+
+def combine[A: Semigroup](a: A, b: A): A =
+  Semigroup[A].combine(a, b)
+
+combine(1, 2)

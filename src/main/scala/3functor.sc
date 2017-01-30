@@ -11,8 +11,9 @@ Functor[Option].lift((i: Int) => i + 1)(Some(2))
 
 def needsFunctor[O[_]: Functor](fa: O[Int]) = Functor[O].map(fa)(_ + 1)
 
-needsFunctor[Option](Some(1))
 needsFunctor(List(1, 2))
+needsFunctor(Future.successful(2))
+needsFunctor[Option](Some(1))
 
 
 val futureListOption = Future(List(Some(1), None, Some(2)))

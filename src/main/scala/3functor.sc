@@ -12,7 +12,9 @@ Functor[Option].lift((i: Int) => i + 1)(Some(2))
 def needsFunctor[O[_]: Functor](fa: O[Int]) = Functor[O].map(fa)(_ + 1)
 
 needsFunctor(List(1, 2))
-needsFunctor(Future.successful(2))
+Await.result(
+  needsFunctor(Future.successful(2)),
+  1.second)
 needsFunctor[Option](Some(1))
 
 

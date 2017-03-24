@@ -54,7 +54,7 @@ import cats.Monad
 import cats.syntax.all._
 
 object Exception {
-  def raiseWhen(f: Boolean)(message: String): Exception[Double] =
+  def raiseWhen(f: => Boolean)(message: String): Exception[Double] =
     if (f) Raise[Double](message)
     else Return(0)
 }

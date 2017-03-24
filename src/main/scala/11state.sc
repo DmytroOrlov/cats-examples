@@ -54,7 +54,7 @@ import cats.Monad
 import cats.syntax.all._
 
 object Exception {
-  def raiseWhen(f: => Boolean)(message: String): Exception[Double] =
+  def raiseWhen(f: => Boolean, message: => String): Exception[Double] =
     if (f) Raise[Double](message)
     else Return(0)
 }
@@ -66,7 +66,7 @@ def evaluate2(exp: Exp): Exception[Double] =
       for {
         a1 <- evaluate2(a)
         b1 <- evaluate2(b)
-        _ <- Exception.raiseWhen(b1 == 0)("error: division by 0")
+        _ <- Exception.raiseWhen(b1 == 0, "error: division by 0")
       } yield a1 / b1
   }
 

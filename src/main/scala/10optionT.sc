@@ -1,5 +1,5 @@
 import cats.data.OptionT
-import cats.instances.all._
+import cats.instances.future._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future

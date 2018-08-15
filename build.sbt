@@ -1,7 +1,7 @@
 lazy val `cats-examples` = (project in file("."))
   .settings(
     version := "1.0",
-    scalaVersion := "2.12.4",
+    scalaVersion := "2.12.6",
     scalacOptions += "-Ypartial-unification",
     libraryDependencies ++= Seq(
       "com.typesafe.akka" %% "akka-stream" % "2.5.9",

@@ -17,7 +17,7 @@ class ApplicativeSuite extends WordSpec with Checkers {
 
     override def pure[A](x: A): Option[A] = Some(x)
 
-    override def ap[A, B](ff: Option[(A) => B])(fa: Option[A]): Option[B] = ff.flatMap(f => fa.map(f))
+    override def ap[A, B](ff: Option[A => B])(fa: Option[A]): Option[B] = ff.flatMap(f => fa.map(f))
   }
 
   "Applicative[Option]" should {

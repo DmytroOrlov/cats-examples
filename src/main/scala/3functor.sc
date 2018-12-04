@@ -21,3 +21,12 @@ needsFunctor[Option](Some(1))
 val futureListOption = Future(List(Some(1), None, Some(2)))
 val f: Future[List[Option[Int]]] = Functor[Future].compose[List].compose[Option].map(futureListOption)(_ + 1)
 Await.result(f, 1.second)
+
+import cats.data.Nested
+import cats.syntax.functor._
+
+val listOption = List(Some(1), None, Some(2))
+
+val nested: Nested[List, Option, Int] = Nested(listOption)
+
+nested.map(_ + 1).value

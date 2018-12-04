@@ -1,8 +1,11 @@
 package actor
 
 import akka.actor.{Actor, ActorSystem, Props}
+
 import scala.concurrent.duration._
 import akka.pattern.ask
+
+import scala.concurrent.Await
 
 object ActorApp extends App {
   val system = ActorSystem()
@@ -11,9 +14,9 @@ object ActorApp extends App {
   val distinct = system.actorOf(Props[Distinct])
 
   val s = "aabccc"
-  calcLength.ask(s)(1.second).mapTo[Int]
+  val f = calcLength.ask(s)(1.second).mapTo[Int]
 
-  Thread.sleep(1.second.toMillis)
+  println(Await.result(f, 1.second))
   system.terminate()
 }
 
